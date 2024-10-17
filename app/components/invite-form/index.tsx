@@ -92,15 +92,8 @@ const InviteForm: React.FC<Props> = ({
             body: JSON.stringify(requestData),
           });
 
-          if (response.ok) {
-            // If the response is 200 (OK)
-            const responseData = await response.json();
-            console.log("Response data:", responseData);
-            setFormStatus(FormStatus.SUCCESS);
-          } else {
-            // If the response is 400 (Bad Request) or other error
-            setFormStatus(FormStatus.FAILED);
-          }
+          // Success if the response is 200 (OK)
+          setFormStatus(response.ok ? FormStatus.SUCCESS : FormStatus.FAILED);
         } catch (error) {
           // Handle network errors or other issues
           setFormStatus(FormStatus.FAILED);

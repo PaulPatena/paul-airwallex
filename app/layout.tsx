@@ -46,7 +46,14 @@ export default function RootLayout({
 
         {/* Footer */}
         <footer className="h-14 flex items-center px-8 bg-primaryDark text-white">
-          <p>&copy; 2024 Paul Patena</p>
+          <a
+            href="https://www.paulpatena.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            &copy; 2024 Paul Patena
+          </a>
         </footer>
       </body>
     </html>
