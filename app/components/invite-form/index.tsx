@@ -44,6 +44,7 @@ const InviteFormInput = ({
   name: string;
   type: string;
   placeholder: string;
+  isDisabled: boolean;
 }) => {
   const [field, meta] = useField(props);
   return (
@@ -51,7 +52,13 @@ const InviteFormInput = ({
       <label htmlFor={props.name} className={INPUT_LABEL_STYLES}>
         {label}
       </label>
-      <input className={INPUT_STYLES} {...field} {...props} id={props.name} />
+      <input
+        className={INPUT_STYLES}
+        {...field}
+        {...props}
+        id={props.name}
+        disabled={props.isDisabled}
+      />
       {meta.touched && meta.error && (
         <div className={INPUT_ERROR_STYLES}>{meta.error}</div>
       )}
@@ -118,6 +125,7 @@ const InviteForm: React.FC<Props> = ({
                 name={"fullName"}
                 type={"text"}
                 placeholder={"John Doe"}
+                isDisabled={isSubmitting}
               />
 
               <InviteFormInput
@@ -125,6 +133,7 @@ const InviteForm: React.FC<Props> = ({
                 name={"email"}
                 type={"email"}
                 placeholder={"jd@airwallex.com"}
+                isDisabled={isSubmitting}
               />
 
               <InviteFormInput
@@ -132,6 +141,7 @@ const InviteForm: React.FC<Props> = ({
                 name={"confirmEmail"}
                 type={"email"}
                 placeholder={"jd@airwallex.com"}
+                isDisabled={isSubmitting}
               />
 
               <button
