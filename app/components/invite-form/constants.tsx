@@ -8,7 +8,6 @@ export const INPUT_ERROR_STYLES = "text-red-600 text-sm";
 
 export const INPUT_LABEL_STYLES = "block mb-1 text-sm font-medium";
 
-export const SUCCESS_MSG =
-  "You've successfully registered, you may now close this modal.";
+export const SUCCESS_MSG_TITLE = "All done!";
 
 export const FAILED_MSG = "Something went wrong, please try again";

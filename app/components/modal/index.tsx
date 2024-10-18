@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
       <div className="bg-white rounded-lg p-6 w-96 relative">
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-xl"
+          className="absolute top-8 right-8 text-xl"
           aria-label="Close modal"
         >
           &times;

@@ -9,15 +9,17 @@ export default function Home() {
   return (
     <section className="h-full flex flex-col items-center justify-center">
       {/* Hero Section */}
-      <div>
-        <h1 className="text-4xl font-bold mb-4">
-          Welcome to <span className="text-accent">Our Amazing App</span>
+      <div className="text-center">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <span className="text-accent tracking-wider">
+            A better way <br />
+            to enjoy every day
+          </span>
         </h1>
-        <p className="text-lg mb-8">
+        <p className="text-xl mb-8">
           Discover a new way to experience{" "}
           <span className="font-semibold">efficiency</span> and{" "}
-          <span className="font-semibold">collaboration</span>. Join us and be
-          part of the future.
+          <span className="font-semibold">collaboration</span>.
         </p>
 
         {/* Request Invite Button */}

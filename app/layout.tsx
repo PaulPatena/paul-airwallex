@@ -35,9 +35,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-screen`}
       >
         {/* Header */}
-        <header className="h-14 flex items-center px-8 bg-primaryDark text-white">
+        <header className="h-14 flex items-center pl-12 md:pl-24 pr-8 bg-primaryDark text-white">
           <nav>
-            <h1 className="text-lg font-bold">Airwallex</h1>
+            <h1 className="text-lg font-bold">BROCOLLI & CO.</h1>
           </nav>
         </header>
 
@@ -45,15 +45,20 @@ export default function RootLayout({
         <main className="flex-1 px-8 bg-primaryLight">{children}</main>
 
         {/* Footer */}
-        <footer className="h-14 flex items-center px-8 bg-primaryDark text-white">
-          <a
-            href="https://www.paulpatena.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            &copy; 2024 Paul Patena
-          </a>
+        <footer className="h-14 w-full px-8 bg-primaryDark text-white flex items-center justify-center">
+          <div className="flex flex-col text-sm items-center">
+            <a
+              href="https://www.paulpatena.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              &copy; 2024 Paul Patena
+            </a>
+            <span>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </span>
+          </div>
         </footer>
       </body>
     </html>

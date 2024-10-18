@@ -7,7 +7,7 @@ import {
   INPUT_ERROR_STYLES,
   INPUT_LABEL_STYLES,
   INPUT_STYLES,
-  SUCCESS_MSG,
+  SUCCESS_MSG_TITLE,
 } from "./constants";
 
 // Define the form values interface
@@ -73,96 +73,102 @@ const InviteForm: React.FC<Props> = ({
   );
 
   return (
-    <Formik
-      initialValues={initInviteFormValues}
-      validationSchema={validationSchema}
-      onSubmit={async (values: InviteFormValues, { setSubmitting }) => {
-        // This callback will only execute if formValues passes yup validation
-        const requestData = {
-          name: values.fullName,
-          email: values.email,
-        };
+    <section className="py-6 px-4">
+      {formStatus != FormStatus.SUCCESS ? (
+        <Formik
+          initialValues={initInviteFormValues}
+          validationSchema={validationSchema}
+          onSubmit={async (values: InviteFormValues, { setSubmitting }) => {
+            // This callback will only execute if formValues passes yup validation
+            const requestData = {
+              name: values.fullName,
+              email: values.email,
+            };
 
-        try {
-          const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-          });
+            try {
+              const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+              });
 
-          // Success if the response is 200 (OK)
-          setFormStatus(response.ok ? FormStatus.SUCCESS : FormStatus.FAILED);
-        } catch (error) {
-          // Handle network errors or other issues
-          setFormStatus(FormStatus.FAILED);
-          console.error(error);
-        } finally {
-          setSubmitting(false); // Always set submitting to false
-        }
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form>
-          <h2 className="text-xl font-semibold mb-4">Request an Invite</h2>
+              // Success if the response is 200 (OK)
+              setFormStatus(
+                response.ok ? FormStatus.SUCCESS : FormStatus.FAILED
+              );
+            } catch (error) {
+              // Handle network errors or other issues
+              setFormStatus(FormStatus.FAILED);
+              console.error(error);
+            } finally {
+              setSubmitting(false); // Always set submitting to false
+            }
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <h2 className="text-xl font-semibold mb-8 text-center">
+                Request an Invite
+              </h2>
 
-          <InviteFormInput
-            label={"Full Name"}
-            name={"fullName"}
-            type={"text"}
-            placeholder={"John Doe"}
-          />
+              <InviteFormInput
+                label={"Full Name"}
+                name={"fullName"}
+                type={"text"}
+                placeholder={"John Doe"}
+              />
 
-          <InviteFormInput
-            label={"Email"}
-            name={"email"}
-            type={"email"}
-            placeholder={"jd@airwallex.com"}
-          />
+              <InviteFormInput
+                label={"Email"}
+                name={"email"}
+                type={"email"}
+                placeholder={"jd@airwallex.com"}
+              />
 
-          <InviteFormInput
-            label={"Confirm Email"}
-            name={"confirmEmail"}
-            type={"email"}
-            placeholder={"jd@airwallex.com"}
-          />
+              <InviteFormInput
+                label={"Confirm Email"}
+                name={"confirmEmail"}
+                type={"email"}
+                placeholder={"jd@airwallex.com"}
+              />
 
-          {formStatus != FormStatus.SUCCESS ? (
-            <button
-              type="submit"
-              className={`w-full py-2 px-4 rounded-md transition-colors duration-200 ${
-                isSubmitting
-                  ? "bg-gray-400 text-white cursor-not-allowed"
-                  : "bg-accent text-white hover:bg-highlight"
-              }`}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Sending..." : "Send"}
-            </button>
-          ) : (
-            <button
-              className="w-full py-2 px-4 rounded-md transition-colors duration-200 bg-accent text-white hover:bg-highlight"
-              onClick={() => onClose()}
-            >
-              Close
-            </button>
+              <button
+                type="submit"
+                className={`w-full mt-8 py-2 px-4 rounded-md transition-colors duration-200 ${
+                  isSubmitting
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : "bg-accent text-white hover:bg-highlight"
+                }`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : "Send"}
+              </button>
+
+              {formStatus === FormStatus.FAILED && (
+                <div className="text-red-600 text-sm mt-2">{FAILED_MSG}</div>
+              )}
+            </Form>
           )}
-
-          {formStatus != FormStatus.NOT_SUBMITED && (
-            <div
-              className={`${
-                formStatus === FormStatus.SUCCESS
-                  ? "text-green-700"
-                  : "text-red-600"
-              } text-sm mt-2`}
-            >
-              {formStatus === FormStatus.SUCCESS ? SUCCESS_MSG : FAILED_MSG}
-            </div>
-          )}
-        </Form>
+        </Formik>
+      ) : (
+        <div className="flex flex-col items-center justify-cente text-center">
+          <h1 className="text-2xl font-bold mb-8 tracking-wide">
+            {SUCCESS_MSG_TITLE}
+          </h1>
+          <p className="text-lg mb-8">
+            Thank you for signing up. We are excited to have you on board!
+          </p>
+          <button
+            className="w-full py-2 px-4 rounded-md transition-colors duration-200 bg-accent text-white hover:bg-highlight"
+            onClick={() => onClose()}
+          >
+            Close
+          </button>
+        </div>
       )}
-    </Formik>
+    </section>
   );
 };
 

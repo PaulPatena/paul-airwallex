@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import InviteForm from "./index"; // Adjust the import path as necessary
 import "@testing-library/jest-dom";
-import { API_URL, FAILED_MSG, SUCCESS_MSG } from "./constants";
+import { API_URL, FAILED_MSG, SUCCESS_MSG_TITLE } from "./constants";
 
 const noop = () => {};
 // Mock the fetch API globally
@@ -141,7 +141,7 @@ describe("InviteForm API Submission", () => {
 
     // Assert success behavior (could be an alert or other UI change)
     await waitFor(() => {
-      expect(screen.getByText(SUCCESS_MSG)).toBeInTheDocument();
+      expect(screen.getByText(SUCCESS_MSG_TITLE)).toBeInTheDocument();
       expect(screen.getByText("Close")).toBeInTheDocument();
     });
   });
